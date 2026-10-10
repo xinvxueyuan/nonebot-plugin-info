@@ -1,9 +1,9 @@
 """pytest 全局初始化。
 
 **为什么必须有这个文件**：本包的 `__init__.py` 是 NoneBot 插件入口，模块级会调用
-`on_command()`（经 `handle`）。测试 `import nonebot_plugin_info` 会先执行它 —— 没有初始化过的
-driver 直接抛 `ValueError: NoneBot has not been initialized.`。conftest 最先被 pytest 导入，
-赶在前面。
+`on_command()`（经 `handle`）。测试 `import nonebot_plugin_info` 会先执行它 ——
+没有初始化过的 driver 会抛 `ValueError: NoneBot has not been initialized.`，
+而 conftest 最先被 pytest 导入，正好赶在前面。
 
 ⚠️ `COMMAND_START` 含**空串**（生产 qbot 里裸词直接触发）。空串**不能**用
 `nonebot.init(COMMAND_START=["", "/"])` 传（pydantic 会丢掉空字符串，只剩 `{'/'}`），

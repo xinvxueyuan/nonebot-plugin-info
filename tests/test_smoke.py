@@ -10,7 +10,7 @@ def test_plugin_imports_and_meta_name():
 
 
 def test_plugin_meta_type_and_adapters():
-    """类型是 application（不是 library，否则会被 collect 判成隐藏）、只声明 onebot v11。"""
+    """类型是 application（library 会被 collect 判成隐藏）；只声明 onebot v11。"""
     import nonebot_plugin_info as p
 
     meta = p.__plugin_meta__
@@ -19,7 +19,7 @@ def test_plugin_meta_type_and_adapters():
 
 
 def test_plugin_hides_itself_from_menu():
-    """照 zhenxun：help 插件自己不进菜单（is_show=False），否则菜单里会多一条自己的条目。"""
+    """照 zhenxun：help 插件自己不进菜单（is_show=False），否则菜单里会有自己的条目。"""
     import nonebot_plugin_info as p
 
     assert p.__plugin_meta__.extra["is_show"] is False

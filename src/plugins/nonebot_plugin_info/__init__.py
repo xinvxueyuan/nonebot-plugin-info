@@ -7,7 +7,11 @@ from nonebot.plugin import PluginMetadata
 __plugin_meta__ = PluginMetadata(
     name="功能",
     description="查看全部插件功能菜单与详情（读取各插件 __plugin_meta__.extra）",
-    usage="功能            查看功能菜单\n功能 <名字>     查看某个功能的详情\n功能 -d         详细菜单",
+    usage=(
+        "功能            查看功能菜单\n"
+        "功能 <名字>     查看某个功能的详情\n"
+        "功能 -d         详细菜单"
+    ),
     type="application",
     homepage="https://github.com/xinvxueyuan/nonebot-plugin-info",
     supported_adapters={"nonebot.adapters.onebot.v11"},
@@ -16,7 +20,7 @@ __plugin_meta__ = PluginMetadata(
         # 「功能」自己，看着像重影。但详情仍能按名字查到它（用户点名就给）。
         "is_show": False,
         # 本插件自己的帮助信息（按 extra 规范：menu_type 不给 → collect 默认「功能」）
-        "introduction": "查看全部插件功能菜单与详情（读取各插件 __plugin_meta__.extra）",
+        "introduction": "查看全部插件功能菜单与详情（读 __plugin_meta__.extra）",
         "commands": [
             {"command": "功能", "desc": "查看功能菜单"},
             {"command": "功能 <名字>", "desc": "查看某个功能的详情"},
