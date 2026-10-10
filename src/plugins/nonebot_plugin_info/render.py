@@ -121,6 +121,21 @@ def build_detail_text(it: PluginItem) -> str:
     return "\n".join(lines)
 
 
+def build_detail_menu_text(groups: dict[str, list[PluginItem]]) -> str:
+    """详细菜单（`功能 -d`）：每个插件带一句话说明 + 全部命令与说明。"""
+    lines: list[str] = ["功能菜单（详细）"]
+    for menu, items in groups.items():
+        lines.append(f"【{menu}】")
+        for it in items:
+            lines.append(f"  {it.name}：{it.description}")
+            lines.extend(
+                "    · " + c.command + (f" — {c.desc}" if c.desc else "")
+                for c in it.commands
+            )
+    lines.append("发「功能 <名字>」看详情")
+    return "\n".join(lines)
+
+
 def _load_htmlkit() -> Any:
     """惰性取 `html_to_pic`（**单独抽出来**，测试可 monkeypatch，不必真装 htmlkit）。"""
     from nonebot_plugin_htmlkit import (  # pyright: ignore[reportMissingImports]

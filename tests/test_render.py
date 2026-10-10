@@ -277,6 +277,26 @@ def test_render_html_none_when_htmlkit_missing():
     assert asyncio.run(render.render_html("<html/>")) is None
 
 
+def test_build_detail_menu_text_fields():
+    """详细菜单（`功能 -d`）：分组 + 每个插件的一句话说明 + 每条命令与说明。"""
+    from nonebot_plugin_info import render
+
+    text = render.build_detail_menu_text(_groups())
+    assert text.splitlines()[0] == "功能菜单（详细）"
+    assert "【群内小游戏】" in text
+    assert "今日老婆：从群友里抽一位当老婆" in text
+    assert "· 今日老婆 — 从群友里抽一位当老婆" in text
+    assert "· 换一只" in text
+    assert text.index("【群内小游戏】") < text.index("【功能】")
+    assert "发「功能 <名字>」看详情" in text
+
+
+def test_build_detail_menu_text_empty():
+    from nonebot_plugin_info import render
+
+    assert render.build_detail_menu_text({}).splitlines()[0] == "功能菜单（详细）"
+
+
 # ---------------------------------------------------------------- CSS 硬约束
 
 
