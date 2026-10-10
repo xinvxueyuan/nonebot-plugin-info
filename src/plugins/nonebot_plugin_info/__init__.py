@@ -28,3 +28,8 @@ __plugin_meta__ = PluginMetadata(
         ],
     },
 )
+
+# 导入即注册命令（`__all__` 里列出来，免得 ruff 判成未使用导入）
+from . import handle
+
+__all__ = ["__plugin_meta__", "handle"]

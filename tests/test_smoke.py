@@ -38,3 +38,26 @@ def test_plugin_lists_its_own_usage_in_extra():
         "功能 -d",
     ]
     assert all(c["desc"] for c in commands)
+
+
+def test_entry_imports_handle_so_command_is_registered():
+    """入口必须导入 handle —— 只写 `__plugin_meta__` 的话命令根本不会注册。
+
+    ⚠️ 光断言 `p.handle` 可能被**别处的 import 顺序**掩盖（别的测试 import 过
+    `nonebot_plugin_info.handle`，属性就会被顺带设上），所以同时钉住源码里那行 import。
+    """
+    import ast
+    import pathlib
+
+    import nonebot_plugin_info as p
+
+    tree = ast.parse(pathlib.Path(p.__file__).read_text(encoding="utf-8"))
+    imported = {
+        alias.name
+        for node in ast.walk(tree)
+        if isinstance(node, ast.ImportFrom)
+        for alias in node.names
+    }
+    assert "handle" in imported
+    assert "handle" in p.__all__
+    assert p.handle.func_cmd.priority == 8
