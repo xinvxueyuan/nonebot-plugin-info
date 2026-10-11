@@ -1,6 +1,6 @@
 [project]
 name = "nonebot-plugin-info"
-version = "0.1.0"
+version = "0.1.1"
 description = "功能菜单：读取各插件 __plugin_meta__.extra，按分类渲染帮助菜单与详情（htmlkit 出图，失败回退纯文本）"
 keywords = ["nonebot2", "nonebot", "bot", "help", "menu", "info"]
 readme = "README.md"

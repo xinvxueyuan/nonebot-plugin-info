@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from nonebot.plugin import PluginMetadata
 
+from .config import Config
+
 __plugin_meta__ = PluginMetadata(
     name="功能",
     description="查看全部插件功能菜单与详情（读取各插件 __plugin_meta__.extra）",
@@ -15,6 +17,7 @@ __plugin_meta__ = PluginMetadata(
     type="application",
     homepage="https://github.com/xinvxueyuan/nonebot-plugin-info",
     supported_adapters={"nonebot.adapters.onebot.v11"},
+    config=Config,
     extra={
         # 隐藏自己（照 zhenxun：help 插件 is_show=False）——否则菜单里会多一条
         # 「功能」自己，看着像重影。但详情仍能按名字查到它（用户点名就给）。

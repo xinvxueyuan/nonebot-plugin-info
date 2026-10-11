@@ -64,6 +64,22 @@ __plugin_meta__ = PluginMetadata(
 
 分类顺序：按每组内最小 `order` 升序；组内按 `(order, name)` 升序。
 
+## 配置（宿主侧菜单信息覆盖）
+
+**不改第三方插件一行**，也能给它补菜单信息 —— 写在本插件自己的配置里
+（`.env` 里是 JSON 字符串）：
+
+```bash
+INFO_EXTRA_OVERRIDES={"nonebot_plugin_parser_lite": {"menu_type": "功能", "order": 30, "commands": [{"command": "发送链接 / BV号", "desc": "自动解析并回图（含小程序卡片）"}]}}
+```
+
+- 键 = 插件**模块短名**（`nonebot_plugin_parser_lite`）或 `metadata.name`
+  （「链接分享解析 Lite 版」）；模块名优先（显示名可能随上游变）。
+- 值只认五个键：`menu_type` / `order` / `commands` / `introduction` / `is_show`——
+  其余键忽略（覆盖不该改掉 `is_library` 之类的语义）。
+- 典型用途：第三方插件（源码不归我们）没有菜单元数据 → 补一条触发说明，
+  菜单里就不会出现空挡；也可用它临时改分类/排序/隐藏。
+
 ## 本插件自己的元数据
 
 本插件也按同一套规范写自己的 `extra`：`is_show=False`（照 zhenxun，帮助插件自己不进菜单，

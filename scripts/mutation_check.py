@@ -71,8 +71,8 @@ MUTATIONS = [
     (
         "M2 build_menu_html 不转义插件名（XSS / 版面破坏）",
         RENDER,
-        "<span class=\"pname\">{_esc(it.name)}</span>",
-        "<span class=\"pname\">{it.name}</span>",
+        '<span class="pname">{_esc(it.name)}</span>',
+        '<span class="pname">{it.name}</span>',
     ),
     (
         "M3 render_html 渲染失败改成抛出（命令会变成「没反应」）",
@@ -86,8 +86,7 @@ MUTATIONS = [
         COLLECT,
         "    for v in groups.values():\n"
         "        v.sort(key=lambda x: (x.order, x.name))",
-        "    for v in groups.values():\n"
-        "        pass  # 变异：不排序",
+        "    for v in groups.values():\n        pass  # 变异：不排序",
     ),
     (
         "M5 find_plugin 只精确匹配（模糊查询失效）",
@@ -100,8 +99,16 @@ MUTATIONS = [
         "        if ql in it.name.lower():\n"
         "            return it\n"
         "    return None",
-        "    ql = q.lower()\n"
-        "    return None  # 变异：去掉大小写与子串匹配\n",
+        "    ql = q.lower()\n    return None  # 变异：去掉大小写与子串匹配\n",
+    ),
+    (
+        "M6 宿主侧菜单覆盖失效（第三方插件在菜单里又出空挡）",
+        COLLECT,
+        "    raw = overrides.get(_module_short(module)) or overrides.get(name)\n"
+        "    if not isinstance(raw, dict):\n"
+        "        return {}\n"
+        "    return {k: v for k, v in raw.items() if k in _OVERRIDABLE}",
+        "    return {}  # 变异：覆盖全部失效（第三方插件照样空挡）\n",
     ),
 ]
 

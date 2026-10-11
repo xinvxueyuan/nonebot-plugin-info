@@ -3,6 +3,22 @@
 本项目遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
 版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [0.1.1] - 2026-10-11
+
+### 新增
+
+- **宿主侧菜单信息覆盖**（`INFO_EXTRA_OVERRIDES`）：给**不能改源码**的第三方插件补
+  `menu_type` / `order` / `commands` / `introduction` / `is_show` —— 键写插件**模块短名**
+  （如 `nonebot_plugin_parser_lite`）或 `metadata.name`（如「链接分享解析 Lite 版」），
+  只认这五个菜单键，其余键忽略（覆盖不该改掉 `is_library` 之类的语义）。
+  用户 2026-10-11 拍板：「不改第三方一行，覆盖写在信息插件自己的配置里」。
+- 本插件自己的元数据挂上 `config=Config`（配置项现在会出现在 NoneBot 的配置里）。
+
+### 变更
+
+- 生产首例：第三方插件「链接分享解析 Lite 版」经覆盖补上 `menu_type=功能` / `order=30` /
+  一条「发送链接 / BV号」触发说明 —— 菜单里不再出现空挡。
+
 ## [0.1.0] - 2026-10-11
 
 首版。
@@ -36,4 +52,5 @@
 - 「功能」是裸词，群里聊到这两个字也会触发菜单（裸词触发生态的共同代价）。
 - 出图需要宿主装 htmlkit + 中文字体；没装走纯文本。
 
+[0.1.1]: https://github.com/xinvxueyuan/nonebot-plugin-info/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/xinvxueyuan/nonebot-plugin-info/releases/tag/v0.1.0
