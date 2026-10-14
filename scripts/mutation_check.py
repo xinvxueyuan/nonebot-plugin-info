@@ -6,6 +6,8 @@
     env -u UV_PYTHON ... uv run python scripts/mutation_check.py
 """
 
+# ruff: noqa: T201  # 这是命令行脚本：print 就是它的输出通道
+
 from __future__ import annotations
 
 import os
@@ -30,7 +32,8 @@ _DROP_ENV = (
     "PYTHONPATH",
 )
 
-#: 本机 pytest 默认临时目录有 ACL 坑（收尾 PermissionError）—— 没设就给个可写的 basetemp。
+#: 本机 pytest 默认临时目录有 ACL 坑（收尾 PermissionError）；
+#: 没设 BASETEMP 就给个可写的 basetemp。
 _DEFAULT_BASETEMP = "C:/Users/admin/AppData/Local/hermes/cache/scratch/info_t"
 
 
@@ -77,7 +80,8 @@ MUTATIONS = [
     (
         "M3 render_html 渲染失败改成抛出（命令会变成「没反应」）",
         RENDER,
-        '        logger.warning("功能菜单渲染失败，回退纯文本: %s: %s", type(e).__name__, e)\n'
+        '        logger.warning("功能菜单渲染失败，回退纯文本: %s: %s",'
+        " type(e).__name__, e)\n"
         "        return None",
         "        raise",
     ),

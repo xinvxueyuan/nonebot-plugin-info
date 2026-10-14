@@ -64,7 +64,7 @@ git -C vendor/nonebot-plugin-info checkout <钉定 SHA>
 
 ```bash
 uv run python -m pytest tests/ -q
-uv run ruff check src/ tests/ && uv run ruff format --check src/ tests/
+uv run ruff check . && uv run ruff format --check .
 uv run pyright
 uv run python scripts/mutation_check.py   # 变异检验：改坏关键行为必须让测试变红
 ```
@@ -91,8 +91,8 @@ __plugin_meta__ = PluginMetadata(
             {"command": "抽奖列表", "desc": "查看已开奖记录"},
         ],
         "introduction": "一句话介绍",  # 可选；缺省用 metadata.description
-        "order": 10,                  # 可选；分类内排序，数字小的在前，缺省 100
-        "is_show": True,              # 可选；False = 不进菜单（详情仍可按名字查到）
+        "order": 10,  # 可选；分类内排序，数字小的在前，缺省 100
+        "is_show": True,  # 可选；False = 不进菜单（详情仍可按名字查到）
     },
 )
 ```
