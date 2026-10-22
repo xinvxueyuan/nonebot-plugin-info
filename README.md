@@ -136,7 +136,7 @@ __plugin_meta__ = PluginMetadata(
 
 ## 许可证与相关仓库
 
-MIT —— `pyproject.toml` 的 `license` 字段声明 MIT；**仓库未附 `LICENSE` 文件**，以 `pyproject.toml` 为准。
+MIT —— 全文见 [`LICENSE`](LICENSE)；`pyproject.toml` 的 `license` 字段同为 MIT。
 
 - 宿主仓库：[xinvxueyuan/qbot](https://github.com/xinvxueyuan/qbot)（以 git 子模块挂在 `vendor/nonebot-plugin-info`，`plugin_dirs` 中已启用）
 - [xinvxueyuan/nonebot-plugin-waifu](https://github.com/xinvxueyuan/nonebot-plugin-waifu) 与
